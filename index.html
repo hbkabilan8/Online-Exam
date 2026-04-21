@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnowledgeHub - Online Examination Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+        <div class="floating-shape shape4"></div>
+        <div class="particles-container"></div>
+    </div>
+    <div id="toastContainer"></div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <i class="fas fa-brain logo-icon"></i>
+            <h2>KnowledgeHub<span class="logo-dot">.</span></h2>
+        </div>
+        <nav id="mainNav">
+            <a href="index.html" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+            <a href="tests.html" class="nav-link"><i class="fas fa-file-alt"></i> Tests</a>
+            <a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+            <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+            <span id="userGreet" class="user-welcome"></span>
+            <button class="btn btn-login" id="btnLogin" onclick="openLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn btn-register" id="btnRegister" onclick="openRegister()"><i class="fas fa-user-plus"></i> Register</button>
+            <button class="btn btn-logout" id="btnLogout" onclick="logout()" style="display:none"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </nav>
+        <button class="mobile-menu-btn"><i class="fas fa-bars" id="mobileIcon"></i></button>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate-text">Challenge Your <span class="highlight">Intellect</span> & Master Skills</h1>
+            <p class="hero-subtitle">Access 150+ expert-crafted tests across Programming, General Knowledge, Certifications, and more. Track progress, compete globally.</p>
+            <div class="stats-container">
+                <div class="stat"><h3>150+</h3><p>Tests Available</p></div>
+                <div class="stat"><h3>50K+</h3><p>Active Learners</p></div>
+                <div class="stat"><h3>95%</h3><p>Success Rate</p></div>
+            </div>
+            <div style="display:flex; gap:15px; margin-top:20px;">
+                <button class="btn-hero" onclick="scrollToTests()"><i class="fas fa-play-circle"></i> Explore Tests</button>
+                <button class="btn btn-register" style="padding:15px 30px; font-size:1.1rem;" onclick="openRegister()"><i class="fas fa-user-plus"></i> Join Free</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card">
+                <i class="fas fa-brain"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTS SECTION -->
+    <section class="tests-section" id="testsSection">
+        <h2 class="section-title">Top <span class="highlight">Tests</span> to Explore</h2>
+        <p class="section-subtitle">Hand-picked across the most popular categories</p>
+        
+        <div class="category-filter">
+            <button class="filter-btn active" onclick="filterTests('all',this)">All Tests</button>
+            <button class="filter-btn" onclick="filterTests('programming',this)">Programming</button>
+            <button class="filter-btn" onclick="filterTests('gk',this)">General Knowledge</button>
+            <button class="filter-btn" onclick="filterTests('courses',this)">Courses</button>
+        </div>
+
+        <div class="tests-grid" id="testsGrid">
+            <!-- cards injected by JS -->
+        </div>
+
+        <div class="view-all-container">
+            <button class="view-all-btn" onclick="window.location.href='tests.html'">View All 150+ <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <h2 class="section-title">Built for Serious <span class="highlight">Learners</span></h2>
+        <p class="section-subtitle">Why KnowledgeHub stands out</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Instant Results</h3>
+                <p>Detailed breakdown right after submission — know exactly where you stand and what to improve.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Progress Tracking</h3>
+                <p>Monitor improvement over time with analytics, streaks, and personalised recommendations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                <h3>Leaderboards</h3>
+                <p>Compete with thousands of learners globally. Climb rankings, earn badges, stay motivated.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile Friendly</h3>
+                <p>Fully responsive across all devices. Learn on the go without missing a beat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <h3>KnowledgeHub<span class="logo-dot">.</span></h3>
+                </div>
+                <p>The premier platform for testing knowledge, tracking progress, and achieving mastery across 150+ domains.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="tests.html">All Tests</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <a href="tests.html?cat=programming">Programming</a>
+                <a href="tests.html?cat=gk">General Knowledge</a>
+                <a href="tests.html?cat=certification">Certification</a>
+                <a href="tests.html?cat=aptitude">Aptitude</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> support@knowledgehub.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Learning St, Education City</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 KnowledgeHub. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- LOGIN POPUP -->
+    <div class="popup-overlay" id="loginOverlay">
+        <div class="popup-box">
+            <button class="popup-close" onclick="closeAll()"><i class="fas fa-times"></i></button>
+            <div class="popup-art">
+                <div class="popup-art-content">
+                    <h2>Welcome Back</h2>
+                    <p>Log in to access your personalised dashboard, continue your tests, and track your global progress.</p>
+                </div>
+            </div>
+            <div class="popup-form-container">
+                <div class="popup-header">
+                    <h3>Sign In 👋</h3>
+                    <p>Enter your credentials to continue</p>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrap"><i class="fas fa-envelope"></i><input type="email" id="lemail" placeholder="you@example.com"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="lpass" placeholder="Enter your password">
+                        <i class="fas fa-eye toggle-pw" onclick="togglePassword('lpass')"></i>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Forgot password?</a>
+                </div>
+                <button class="btn-submit" id="loginSubmitBtn" onclick="login()">Login Now</button>
+                <div class="divider"><span>or continue with</span></div>
+                <div class="social-btns">
+                    <button class="btn-social"><i class="fab fa-google"></i> Google</button>
+                    <button class="btn-social"><i class="fab fa-github"></i> GitHub</button>
+                </div>
+                <p class="popup-switch">No account? <a onclick="switchToRegister()">Register free</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTER POPUP -->
+    <div class="popup-overlay" id="registerOverlay">
+        <div class="popup-box">
+            <button class="popup-close" onclick="closeAll()"><i class="fas fa-times"></i></button>
+            <div class="popup-art" style="background: linear-gradient(135deg, #f72585, var(--secondary));">
+                <div class="popup-art-content">
+                    <h2>Join 50K+ Learners</h2>
+                    <p>Unlock 150+ premium tests, climb global leaderboards, and certify your skills today.</p>
+                </div>
+            </div>
+            <div class="popup-form-container">
+                <div class="popup-header">
+                    <h3>Create Account 🚀</h3>
+                    <p>Your journey begins here</p>
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <div class="input-wrap"><i class="fas fa-user"></i><input type="text" id="rname" placeholder="Your full name"></div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrap"><i class="fas fa-envelope"></i><input type="email" id="remail" placeholder="you@example.com"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="rpass" placeholder="Min. 8 characters">
+                        <i class="fas fa-eye toggle-pw" onclick="togglePassword('rpass')"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrap"><i class="fas fa-lock"></i><input type="password" id="rcpass" placeholder="Repeat password"></div>
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox" id="termsCheck"> I agree to the <a href="#">Terms & Conditions</a></label>
+                </div>
+                <button class="btn-submit" id="regSubmitBtn" onclick="register()">Create Account</button>
+                <p class="popup-switch" style="margin-top:16px">Already have an account? <a onclick="switchToLogin()">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEST DETAILS MODAL -->
+    <div class="popup-overlay" id="testDetailsModal">
+        <div class="popup-box" id="testDetailsBox">
+            <button class="popup-close" onclick="closeTestDetails()"><i class="fas fa-times"></i></button>
+            <!-- filled by JS -->
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+    // =====================================================
+    // DATA
+    // =====================================================
+    const TESTS_DATA = [
+        { id:1, category:'programming', icon:'fab fa-js-square', color:'#f7df1e', name:'JavaScript Mastery', desc:'Advanced JavaScript, ES6+, closures, async/await and real-world patterns.', questions:50, duration:60, difficulty:'easy', rating:4.8, participants:4200 },
+        { id:2, category:'programming', icon:'fab fa-python', color:'#4584b6', name:'Python Programming', desc:'Data structures, OOP, algorithms and essential Python libraries.', questions:45, duration:45, difficulty:'intermediate', rating:4.7, participants:3800 },
+        { id:7, category:'programming', icon:'fab fa-java', color:'#f89820', name:'Java Certification', desc:'Core Java, multithreading, collections framework and JVM internals.', questions:70, duration:120, difficulty:'advanced', rating:4.9, participants:2100 },
+        { id:3, category:'gk', icon:'fas fa-globe-americas', color:'#4cc9f0', name:'Current Affairs 2024', desc:'Latest events in politics, technology, sports and international relations.', questions:40, duration:30, difficulty:'easy', rating:4.6, participants:5100 },
+        { id:4, category:'gk', icon:'fas fa-landmark', color:'#ff9e00', name:'World History', desc:'Ancient civilizations, world wars, revolutions and historical figures.', questions:60, duration:75, difficulty:'advanced', rating:4.7, participants:1900 },
+        { id:8, category:'gk', icon:'fas fa-flask', color:'#7209b7', name:'Science & Technology', desc:'Latest discoveries, physics concepts, biotechnology and space research.', questions:50, duration:40, difficulty:'intermediate', rating:4.8, participants:3300 },
+        { id:5, category:'courses', icon:'fas fa-database', color:'#f72585', name:'Database Management', desc:'SQL queries, normalization, transactions and database design patterns.', questions:35, duration:50, difficulty:'intermediate', rating:4.6, participants:2700 },
+        { id:6, category:'courses', icon:'fas fa-shield-alt', color:'#4cc9f0', name:'Cyber Security', desc:'Network security, cryptography, ethical hacking and threat mitigation.', questions:55, duration:90, difficulty:'advanced', rating:4.9, participants:1600 },
+    ];
+
+    const DIFF_LABELS = { easy:'Beginner', intermediate:'Intermediate', advanced:'Advanced' };
+    const CAT_LABELS = { programming:'Programming', gk:'Gen. Knowledge', courses:'Courses', certification:'Certification', language:'Languages', aptitude:'Aptitude' };
+    const CAT_COLORS = { programming:'rgba(108,99,255,', gk:'rgba(76,201,240,', courses:'rgba(247,37,133,', certification:'rgba(255,158,0,', language:'rgba(114,9,183,', aptitude:'rgba(58,12,163,' };
+
+    // =====================================================
+    // RENDER TESTS
+    // =====================================================
+    function renderTestCards(filter='all') {
+        const grid = document.getElementById('testsGrid');
+        const filtered = filter === 'all' ? TESTS_DATA : TESTS_DATA.filter(t=>t.category===filter);
+        grid.innerHTML = filtered.map(t => {
+            return `
+            <div class="test-card" data-category="${t.category}">
+                <div class="difficulty ${t.difficulty}">${DIFF_LABELS[t.difficulty]}</div>
+                <div class="card-icon"><i class="${t.icon}"></i></div>
+                <h3>${t.name}</h3>
+                <p>${t.desc}</p>
+                <div class="card-meta">
+                    <span><i class="fas fa-question-circle"></i> ${t.questions} Qs</span>
+                    <span><i class="fas fa-clock"></i> ${t.duration} min</span>
+                    <span><i class="fas fa-users"></i> ${fmtNum(t.participants)}</span>
+                </div>
+                <button class="card-btn" onclick="handleStartTest(${t.id})"><i class="fas fa-play-circle"></i> Start Test</button>
+            </div>`;
+        }).join('');
+    }
+
+    function fmtNum(n) { return n>=1000?(n/1000).toFixed(1)+'k':n; }
+
+    function filterTests(cat, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+        renderTestCards(cat);
+    }
+
+    function scrollToTests() {
+        document.getElementById('testsSection').scrollIntoView({behavior:'smooth'});
+    }
+
+    // =====================================================
+    // TEST DETAILS MODAL
+    // =====================================================
+    function showTestDetails(testId) {
+        const t = TESTS_DATA.find(x=>x.id===testId);
+        if(!t) return;
+        const box = document.getElementById('testDetailsBox');
+        const cc = CAT_COLORS[t.category] || 'rgba(108,99,255,';
+        box.innerHTML = `
+            <button class="popup-close" onclick="closeTestDetails()"><i class="fas fa-times"></i></button>
+            <div class="detail-header">
+                <div class="detail-icon"><i class="${t.icon}" style="color:${t.color}"></i></div>
+                <div>
+                    <div class="tc-cat" style="background:${cc}0.1);color:${cc}0.9);border:1px solid ${cc}0.2);display:inline-block;margin-bottom:8px">${CAT_LABELS[t.category]||t.category}</div>
+                    <h3 style="font-family:var(--font-display);font-weight:800;font-size:1.3rem">${t.name}</h3>
+                    <p style="color:var(--muted);font-size:0.88rem;margin-top:6px">${t.desc}</p>
+                </div>
+            </div>
+            <div class="detail-meta-grid">
+                <div class="detail-meta-item"><label>Questions</label><span>${t.questions}</span></div>
+                <div class="detail-meta-item"><label>Duration</label><span>${t.duration} min</span></div>
+                <div class="detail-meta-item"><label>Difficulty</label><span class="tc-diff diff-${t.difficulty}" style="display:inline">${DIFF_LABELS[t.difficulty]}</span></div>
+                <div class="detail-meta-item"><label>Rating</label><span>⭐ ${t.rating}</span></div>
+                <div class="detail-meta-item"><label>Participants</label><span>${fmtNum(t.participants)}</span></div>
+                <div class="detail-meta-item"><label>Category</label><span>${CAT_LABELS[t.category]||t.category}</span></div>
+            </div>
+            <button class="btn-start-large" onclick="closeTestDetails();handleStartTest(${t.id})"><i class="fas fa-play-circle"></i> Start Test Now</button>`;
+        document.getElementById('testDetailsModal').style.display = 'flex';
+    }
+
+    function closeTestDetails() {
+        document.getElementById('testDetailsModal').style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    // =====================================================
+    // START TEST
+    // =====================================================
+    function handleStartTest(testId) {
+        let userAuth;
+        try {
+            userAuth = JSON.parse(localStorage.getItem('kh_user'));
+        } catch(e) {
+            userAuth = null;
+        }
+
+        if(userAuth) {
+            window.location.href = `test.html?test=${testId}`;
+        } else {
+            showNotification('Please login to take the test', 'info');
+            openLogin();
+            // Store pending test
+            sessionStorage.setItem('pendingTest', testId);
+        }
+    }
+
+    // Wait for DOM to load, then render test cards. Auth and Particles are handled by script.js
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTestCards('all');
+    });
+    </script>
+</body>
+</html>

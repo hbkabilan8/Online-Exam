@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tests - KnowledgeHub</title>
+    <link rel="stylesheet" href="css/style.css?v=2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-animation">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+        <div class="floating-shape shape4"></div>
+        <div class="particles-container"></div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <i class="fas fa-brain logo-icon"></i>
+            <h2>KnowledgeHub<span class="logo-dot">.</span></h2>
+        </div>
+        <nav>
+            <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="tests.html" class="nav-link active"><i class="fas fa-file-alt"></i> Tests</a>
+            <a href="about.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+            <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+            <span id="user" class="user-welcome"></span>
+            <button class="btn btn-login" onclick="openLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn btn-register" onclick="openRegister()"><i class="fas fa-user-plus"></i> Register</button>
+            <button class="btn btn-logout" onclick="logout()" id="logoutBtn" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="tests-hero">
+        <div class="tests-hero-content">
+            <h1 class="animate-text">Explore All <span class="highlight">Tests</span></h1>
+            <p class="tests-subtitle">Discover 150+ tests across various categories to challenge and improve your knowledge</p>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search tests by name, category, or keyword...">
+                    <button class="search-btn" onclick="searchTests()">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="all-tests-section">
+        <div class="tests-container">
+            <div class="tests-header">
+                <div class="tests-stats">
+                    <div class="stat-card">
+                        <i class="fas fa-file-alt"></i>
+                        <div>
+                            <h3 id="totalTests">150+</h3>
+                            <p>Total Tests</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h3>10K+</h3>
+                            <p>Active Test Takers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <div>
+                            <h3>4.8</h3>
+                            <p>Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tests-controls">
+                    <div class="sort-control">
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect" onchange="sortTests()">
+                            <option value="popular">Most Popular</option>
+                            <option value="newest">Newest First</option>
+                            <option value="name">Name (A-Z)</option>
+                            <option value="difficulty">Difficulty</option>
+                            <option value="duration">Duration</option>
+                        </select>
+                    </div>
+                    
+                    <div class="view-control">
+                        <button class="view-btn active" onclick="changeView('grid')"><i class="fas fa-th"></i></button>
+                        <button class="view-btn" onclick="changeView('list')"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-tabs">
+                <div class="category-tab active" data-category="all" onclick="filterTestsByCategory('all')">
+                    <i class="fas fa-th"></i>
+                    <span>All Tests</span>
+                </div>
+                <div class="category-tab" data-category="programming" onclick="filterTestsByCategory('programming')">
+                    <i class="fas fa-code"></i>
+                    <span>Programming</span>
+                </div>
+                <div class="category-tab" data-category="gk" onclick="filterTestsByCategory('gk')">
+                    <i class="fas fa-globe"></i>
+                    <span>General Knowledge</span>
+                </div>
+                <div class="category-tab" data-category="courses" onclick="filterTestsByCategory('courses')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Courses</span>
+                </div>
+                <div class="category-tab" data-category="certification" onclick="filterTestsByCategory('certification')">
+                    <i class="fas fa-certificate"></i>
+                    <span>Certification</span>
+                </div>
+                <div class="category-tab" data-category="language" onclick="filterTestsByCategory('language')">
+                    <i class="fas fa-language"></i>
+                    <span>Languages</span>
+                </div>
+                <div class="category-tab" data-category="aptitude" onclick="filterTestsByCategory('aptitude')">
+                    <i class="fas fa-calculator"></i>
+                    <span>Aptitude</span>
+                </div>
+            </div>
+            
+            <div class="tests-grid" id="testsGrid">
+                <!-- Tests will be loaded dynamically -->
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Include the same popups from index.html -->
+    <!-- LOGIN POPUP -->
+    <div class="popup-overlay" id="loginOverlay">
+        <div class="popup-box">
+            <button class="popup-close" onclick="closeAll()"><i class="fas fa-times"></i></button>
+            <div class="popup-art">
+                <div class="popup-art-content">
+                    <h2>Welcome Back</h2>
+                    <p>Log in to access your personalised dashboard, continue your tests, and track your global progress.</p>
+                </div>
+            </div>
+            <div class="popup-form-container">
+                <div class="popup-header">
+                    <h3>Sign In 👋</h3>
+                    <p>Enter your credentials to continue</p>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrap"><i class="fas fa-envelope"></i><input type="email" id="lemail" placeholder="you@example.com"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="lpass" placeholder="Enter your password">
+                        <i class="fas fa-eye toggle-pw" onclick="togglePassword('lpass')"></i>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Forgot password?</a>
+                </div>
+                <button class="btn-submit" id="loginSubmitBtn" onclick="login()">Login Now</button>
+                <div class="divider"><span>or continue with</span></div>
+                <div class="social-btns">
+                    <button class="btn-social"><i class="fab fa-google"></i> Google</button>
+                    <button class="btn-social"><i class="fab fa-github"></i> GitHub</button>
+                </div>
+                <p class="popup-switch">No account? <a onclick="switchToRegister()">Register free</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- REGISTER POPUP -->
+    <div class="popup-overlay" id="registerOverlay">
+        <div class="popup-box">
+            <button class="popup-close" onclick="closeAll()"><i class="fas fa-times"></i></button>
+            <div class="popup-art" style="background: linear-gradient(135deg, #f72585, var(--secondary));">
+                <div class="popup-art-content">
+                    <h2>Join 50K+ Learners</h2>
+                    <p>Unlock 150+ premium tests, climb global leaderboards, and certify your skills today.</p>
+                </div>
+            </div>
+            <div class="popup-form-container">
+                <div class="popup-header">
+                    <h3>Create Account 🚀</h3>
+                    <p>Your journey begins here</p>
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <div class="input-wrap"><i class="fas fa-user"></i><input type="text" id="rname" placeholder="Your full name"></div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrap"><i class="fas fa-envelope"></i><input type="email" id="remail" placeholder="you@example.com"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="rpass" placeholder="Min. 8 characters">
+                        <i class="fas fa-eye toggle-pw" onclick="togglePassword('rpass')"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrap"><i class="fas fa-lock"></i><input type="password" id="rcpass" placeholder="Repeat password"></div>
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox" id="termsCheck"> I agree to the <a href="#">Terms & Conditions</a></label>
+                </div>
+                <button class="btn-submit" id="regSubmitBtn" onclick="register()">Create Account</button>
+                <p class="popup-switch" style="margin-top:16px">Already have an account? <a onclick="switchToLogin()">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo-container">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <h3>KnowledgeHub<span class="logo-dot">.</span></h3>
+                </div>
+                <p>Master your skills with our comprehensive online examination platform.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="tests.html">All Tests</a>
+                <a href="#">Practice Mode</a>
+                <a href="#">Leaderboard</a>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <a href="#" onclick="filterTestsByCategory('programming')">Programming</a>
+                <a href="#" onclick="filterTestsByCategory('gk')">General Knowledge</a>
+                <a href="#" onclick="filterTestsByCategory('gk')">Current Affairs</a>
+                <a href="#" onclick="filterTestsByCategory('certification')">Certification</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-envelope"></i> support@knowledgehub.com</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Learning St, Education City</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 KnowledgeHub. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="js/tests.js"></script>
+</body>
+</html>
